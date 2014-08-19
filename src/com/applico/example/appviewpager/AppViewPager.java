@@ -40,7 +40,7 @@ public class AppViewPager {
 	//animation duration and the translation distance
     
     //animations for the sliding part of this panel
-    ObjectAnimator moveLeft, moveLeft2, moveRight, moveRight2;
+    static ObjectAnimator moveLeft, moveLeft2, moveRight, moveRight2;
     
     //This is the id key passed into the constructor for each Fragment in the pager, keep it flat and simple for best performance
     //try setting tags on views in the Fragment to hold the fragment's data 
@@ -162,10 +162,11 @@ public class AppViewPager {
     	//selected is going to be the animation, left or right
     	final ObjectAnimator selected;
     	if(right) {
-    		mSelected++;
-    		if(mSelected == mBackgrounds.length) {
-    			mSelected = 0;
-    		}
+
+    		mSelected--;
+    		if(mSelected < 0) {
+    			mSelected = mBackgrounds.length-1;
+    		} 
     		//instantiate if this is our first call
     		if(moveRight == null) {
     			rightArrow();
@@ -173,10 +174,10 @@ public class AppViewPager {
     		selected = moveRight;
 
     	} else {
-    		mSelected--;
-    		if(mSelected < 0) {
-    			mSelected = mBackgrounds.length-1;
-    		} 
+    		mSelected++;
+    		if(mSelected == mBackgrounds.length) {
+    			mSelected = 0;
+    		}
     		//instantiate the animation if this is our first call
     		if(moveLeft == null) {
     			leftArrow();

@@ -29,6 +29,11 @@ public class AppViewPgActivity extends Activity {
         mDetector.onTouchEvent(event);
         return super.onTouchEvent(event);
     }
+    
+    @Override
+    public void onBackPressed() {
+      finish();
+    }
   
 }
 
