@@ -45,10 +45,18 @@ public class AppViewPager {
     //This is the id key passed into the constructor for each Fragment in the pager, keep it flat and simple for best performance
     //try setting tags on views in the Fragment to hold the fragment's data 
 	int[] mBackgrounds = { R.drawable.blue_background, R.drawable.green_background, R.drawable.purple_background };
+	public AppViewPager(int[] fragmentIds, int containerId, Activity a){
+		mBackgrounds = fragmentIds;
+		init(containerId, a);
+	}
 	
 	public AppViewPager(int containerId, Activity a){
-    	//activities cannot retain the fragment manager...
-        mFragmentView = a.findViewById(containerId);
+        init(containerId, a);
+    }
+	
+	private void init(int containerId, Activity a) {
+		//cannot retain the fragment manager past the activity finish
+		mFragmentView = a.findViewById(containerId);
         mMgr = a.getFragmentManager();
         //Swipe listener
         mDetector = new GestureDetector(a, new GD());
@@ -60,7 +68,7 @@ public class AppViewPager {
     	mXaction.commit();
     	Log.i(TAG, "committed first fragment");
     	mDuration = a.getResources().getInteger(android.R.integer.config_shortAnimTime);
-    }
+	}
 	
 	public GestureDetector getGestureDetector() {
 		//pass the gestureDetector back to the activity, touch interaction works better that way
