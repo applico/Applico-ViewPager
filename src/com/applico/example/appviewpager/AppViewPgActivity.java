@@ -18,9 +18,17 @@ public class AppViewPgActivity extends Activity {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_pg_activity);
+    }
+
+    //Moving app pager code here to avoid state loss exceptions when using the backstack
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        // This would normally be in Resume, here to avoid illegal state fragment transaction errors
+    	//http://www.androiddesignpatterns.com/2013/08/fragment-transaction-commit-state-loss.html
         final AppViewPager pgr = new AppViewPager(R.id.container, this);
         mDetector = pgr.getGestureDetector();
-    	Log.i(TAG, "committed first fragment");
+        Log.i(TAG, "created view pager");
     }
     
     @Override 
