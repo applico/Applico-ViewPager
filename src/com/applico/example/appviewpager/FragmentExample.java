@@ -13,6 +13,12 @@ public class FragmentExample extends Fragment {
 	private final int background;
 	private final int index;
 	
+	public FragmentExample() {
+		//required empty constructor
+		index = 0;
+		background = R.drawable.blue_background;
+	}
+	
 	public FragmentExample(int bgResource, int position) {
 		background = bgResource;
 		index = position;
@@ -30,9 +36,8 @@ public class FragmentExample extends Fragment {
         // Inflate the layout for this fragment
         final View fragmentView = inflater.inflate(R.layout.fragment_layout, container, false);
         fragmentView.findViewById(R.id.root).setBackgroundResource(background);
-        TextView tv = (TextView) fragmentView.findViewById(R.id.tv);
-    	if(tv != null) tv.setText(tv.getText() + " Fragment Id: " + (index+1));
-
+        ((TextView) fragmentView.findViewById(R.id.tv)).setText("Applico Apps: " + (index+1));
+        fragmentView.invalidate();
         return fragmentView;
     }
 }

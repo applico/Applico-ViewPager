@@ -68,6 +68,7 @@ public class AppViewPager {
     	mXaction.commit();
     	Log.i(TAG, "committed first fragment");
     	mDuration = a.getResources().getInteger(android.R.integer.config_shortAnimTime);
+    	moveLeft = moveLeft2 = moveRight = moveRight2 = null;
 	}
 	
 	public GestureDetector getGestureDetector() {
